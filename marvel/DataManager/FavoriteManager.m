@@ -7,6 +7,7 @@
 //
 
 #import "FavoriteManager.h"
+#import "Character.h"
 
 @interface FavoriteManager ()
 
@@ -30,7 +31,8 @@
 - (instancetype)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         self.characters = [NSMutableDictionary new];
         
         NSString *cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
@@ -40,6 +42,11 @@
         self.persistantFile = [path stringByAppendingPathComponent:fileName];
     }
     return self;
+}
+
+- (NSArray<Character *> *)all
+{
+    return [self.characters allValues];
 }
 
 - (void)add:(Character *)character
@@ -57,11 +64,6 @@
     return [[self.characters allKeys] containsObject:[NSNumber numberWithInteger:character.idField]];
 }
 
-- (NSArray*)all
-{
-    return [self.characters allValues];
-}
-
 - (void)persist
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -76,7 +78,8 @@
 - (void)restore
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:self.persistantFile]) {
+    if ([fileManager fileExistsAtPath:self.persistantFile])
+    {
         self.characters = [NSKeyedUnarchiver unarchiveObjectWithFile:self.persistantFile];
     }
 }

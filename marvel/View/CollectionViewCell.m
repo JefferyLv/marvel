@@ -13,21 +13,23 @@
 
 #pragma mark <Cell reusing>
 
--(void)prepareForReuse {
+- (void)prepareForReuse
+{
     [super prepareForReuse];
     
     self.name.text = @"";
     self.avatar.image = nil;
-    
 }
 
 #pragma mark <Cell configuration>
 
--(void)configureCellWithName:(NSString *)name andImage:(NSString *)image {
-    
+- (void)configureCellWithName:(NSString *)name
+                     andImage:(NSString *)image
+                     andLiked:(BOOL)liked
+{
     self.name.text = name;
+    self.like.selected = liked;
     [self.avatar setImageFromCache:image];
-    
 }
 
 @end

@@ -20,19 +20,17 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MarvelPrivateKey</key>
+	<string>a798b0720d173c28c448e3057e904e8d03d7128e</string>
+	<key>MarvelPublicKey</key>
+	<string>a640939d3374a4db86b7e486dd723be7</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>MarvelPublicKey</key>
-	<string>a640939d3374a4db86b7e486dd723be7</string>
-	<key>MarvelPrivateKey</key>
-	<string>a798b0720d173c28c448e3057e904e8d03d7128e</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

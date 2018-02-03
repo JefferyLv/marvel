@@ -15,7 +15,17 @@
     dispatch_queue_t _ioQueue;
 }
 
-#pragma mark Initializing the cache
+#pragma mark <Initializing the cache>
+
++ (ImageCache*)sharedCache
+{
+    static ImageCache *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[ImageCache alloc] initWithName:@"shared"];
+    });
+    return instance;
+}
 
 - (instancetype)initWithName:(NSString*)name
 {
@@ -58,20 +68,12 @@
                                                   object:nil];
 }
 
-+ (ImageCache*)sharedCache
-{
-    static ImageCache *instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[ImageCache alloc] initWithName:@"shared"];
-    });
-    return instance;
-}
-
 - (void)didReceiveMemoryWarning:(NSNotification*)notification
 {
     [_memoryCaches removeAllObjects];
 }
+
+#pragma mark <Accessing the cache>
 
 - (void)setImage:(UIImage*)image forKey:(NSString*)key
 {
@@ -114,7 +116,7 @@
     // Second check the disk cache...
     dispatch_async(_ioQueue, ^{
         
-        NSString* path = [_rootDirectory stringByAppendingPathComponent:md5Key];
+        NSString *path = [_rootDirectory stringByAppendingPathComponent:md5Key];
         NSData *data = [NSData dataWithContentsOfFile:path];
         UIImage *image = [UIImage imageWithData:data];
 

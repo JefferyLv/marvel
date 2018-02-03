@@ -11,8 +11,11 @@
 @interface CollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatar;
+@property (weak, nonatomic) IBOutlet UIButton *like;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 
--(void)configureCellWithName:(NSString *)name andImage:(NSString *)image;
+- (void)configureCellWithName:(NSString *)name
+                     andImage:(NSString *)image
+                     andLiked:(BOOL)liked;
 
 @end

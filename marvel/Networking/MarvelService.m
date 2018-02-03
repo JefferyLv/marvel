@@ -93,20 +93,17 @@ static NSString * const HOST = @"https://gateway.marvel.com:443";
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData * _Nullable data,
+                                                                NSURLResponse * _Nullable response,
+                                                                NSError * _Nullable error) {
         if (error) {
             if (completion) completion(nil, error);
-            return;
+        } else {
+            UIImage *img = [UIImage imageWithData:data];
+            if (completion) completion(img, nil);
         }
-        
-        UIImage *img = [UIImage imageWithData:data];
-//        [[ImageCache sharedCache] setImage:img forKey:image];
-        dispatch_async(dispatch_get_main_queue(), ^{
-//            self.avatar.image = img;
-            if (completion) {
-                completion(img, nil);
-            }
-        });
+                                                
     }];
     [task resume];
 }

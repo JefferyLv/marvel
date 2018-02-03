@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Character.h"
+
+@class Character;
 
 @interface FavoriteManager : NSObject
 
 + (instancetype)sharedInstance;
 
-- (NSArray*)all;
+- (NSArray<Character *> *)all;
 - (void)add:(Character *)character;
 - (void)remove:(Character *)character;
 - (BOOL)isFavorited:(Character *)character;

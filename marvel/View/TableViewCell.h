@@ -13,6 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *desc;
 
--(void)configureCellWithName:(NSString *)name andDescription:(NSString *)descritpion;
+- (void)configureCellWithName:(NSString *)name andDescription:(NSString *)descritpion;
 
 @end

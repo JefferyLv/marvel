@@ -13,11 +13,12 @@
 
 #pragma mark <Cell configuration>
 
--(void)configureCellWithName:(NSString *)name andDescription:(NSString *)description {
+- (void)configureCellWithName:(NSString *)name andDescription:(NSString *)description {
     
     self.name.text = name;
     self.desc.text = description;
 
+    [self.desc sizeToFit];
 }
 
 @end

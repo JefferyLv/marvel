@@ -11,6 +11,8 @@
 #import "Character.h"
 
 #import "UIImageView+Cache.h"
+#import "UILabel+Size.h"
+
 #import "FavoriteManager.h"
 
 static NSString * const cellIdentifier = @"DetailCell";
@@ -45,6 +47,8 @@ enum {
     self.likeButton.selected = [[FavoriteManager sharedInstance] isFavorited:self.character];
     
     [self.characterImage setImageFromCache:[self.character.thumbnail toString]];
+    [self.characterImage.layer setCornerRadius:CGRectGetHeight([self.characterImage bounds]) / 2];
+    [self.characterImage.layer setMasksToBounds:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,24 +86,9 @@ enum {
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
                                                           forIndexPath:indexPath];
     
-    NSArray<Item*> *items;
-    switch (indexPath.section) {
-        case Comics:
-            items = self.character.comics.items;
-            break;
-        case Events:
-            items = self.character.events.items;
-            break;
-        case Stories:
-            items = self.character.stories.items;
-            break;
-        case Series:
-        default:
-            items = self.character.series.items;
-    }
-    
-    [cell configureCellWithName:items[indexPath.row].name
-                 andDescription:items[indexPath.row].resourceURI];
+    Item *item = [self getItems:indexPath.section][indexPath.row];
+    [cell configureCellWithName:item.name
+                 andDescription:item.resourceURI];
     
     return cell;
 }
@@ -107,25 +96,11 @@ enum {
 - (NSInteger)tableView:(nonnull UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
     
-    NSArray<Item*> *items;
-    switch (section) {
-        case Comics:
-            items = self.character.comics.items;
-            break;
-        case Events:
-            items = self.character.events.items;
-            break;
-        case Stories:
-            items = self.character.stories.items;
-            break;
-        case Series:
-        default:
-            items = self.character.series.items;
-    }
+    NSArray *items = [self getItems:section];
     return items.count >= 3 ? 3 : items.count;
 }
 
-- (NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section{
+- (NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case Comics:
             return @"Comics";
@@ -140,5 +115,30 @@ enum {
 }
 
 #pragma mark <UITableViewDelegate>
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGFloat FontSize = 16;
+    UIFont *font = [UIFont systemFontOfSize:FontSize];
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    Item *item = [self getItems:indexPath.section][indexPath.row];
+    return [UILabel getHeightByWidth:screenSize.width title:item.resourceURI font:font] + 60;
+}
+
+#pragma mark <MISC>
+
+- (NSArray<Item*> *)getItems:(NSInteger)section {
+    switch (section) {
+        case Comics:
+            return self.character.comics.items;
+        case Events:
+            return self.character.events.items;
+        case Stories:
+            return self.character.stories.items;
+        case Series:
+        default:
+            return self.character.series.items;
+    }
+}
 
 @end

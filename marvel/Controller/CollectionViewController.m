@@ -25,10 +25,11 @@ static NSString * const detailViewCtrl = @"DetailViewCtrl";
 @property (nonatomic, assign) BOOL hasMore;
 @property (nonatomic, strong) NSMutableArray *characters;
 
-@property (nonatomic, weak) IBOutlet UIButton *searchButton;
-@property (nonatomic, weak) IBOutlet UITextField *searchString;
+@property (nonatomic, weak) IBOutlet UIButton *homeButton;
+@property (nonatomic, weak) IBOutlet UIButton *favoButton;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, weak) IBOutlet UIVisualEffectView *progressView;
+@property (nonatomic, weak) IBOutlet UIView *progressView;
 
 @end
 
@@ -40,6 +41,8 @@ static NSString * const detailViewCtrl = @"DetailViewCtrl";
     
     self.characters = [NSMutableArray new];
     self.hasMore = NO;
+    
+    [self loadMore:nil];
 }
 
 
@@ -79,12 +82,26 @@ static NSString * const detailViewCtrl = @"DetailViewCtrl";
     [self.collectionView reloadData];
 }
 
+- (IBAction)like:(id)sender {
+    UIButton *like = (UIButton *)sender;
+    UIView *prarentView = [sender superview];
+    CollectionViewCell *cell = (CollectionViewCell *)[prarentView superview];
+    NSIndexPath *index = [self.collectionView indexPathForCell:cell];
+    
+    like.selected = !like.selected;
+    if (like.selected) {
+        [[FavoriteManager sharedInstance] add:self.characters[index.row]];
+    } else {
+        [[FavoriteManager sharedInstance] remove:self.characters[index.row]];
+    }
+}
+
 - (IBAction)loadMore:(id)sender {
     [self showProgress];
     
     NSInteger limit = 20;
     NSInteger offset = self.characters.count;
-    NSString* nameStart = self.searchString.text;
+    NSString* nameStart = self.searchBar.text;
     
     __weak typeof(self) weakSelf = self;
     dispatch_queue_t highPriority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
@@ -128,8 +145,10 @@ static NSString * const detailViewCtrl = @"DetailViewCtrl";
     cell.clipsToBounds = YES;
     
     Character *character = self.characters[indexPath.row];
+    BOOL like = [[FavoriteManager sharedInstance] isFavorited:character];
     [cell configureCellWithName:character.name
-                       andImage:[character.thumbnail toString]];
+                       andImage:[character.thumbnail toString]
+                       andLiked:like];
     
     return cell;
 }
@@ -152,13 +171,31 @@ static NSString * const detailViewCtrl = @"DetailViewCtrl";
 
 #pragma mark <UICollectionViewDelegate>
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     DetailViewController *detailView = [self.storyboard instantiateViewControllerWithIdentifier:detailViewCtrl];
     Character *character = self.characters[indexPath.row];
     detailView.character = character;
     
     [self presentViewController:detailView animated:YES completion:nil];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width - 40;
+    float cellWidth = screenWidth / 2.0;
+    CGSize size = CGSizeMake(cellWidth, cellWidth + 40);
+    
+    return size;
+}
+
+#pragma mark <UISearchBarDelegate>
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.characters removeAllObjects];
+    
+    [self loadMore:nil];
 }
 
 @end
