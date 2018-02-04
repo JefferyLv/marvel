@@ -31,6 +31,8 @@ static NSString * const detailViewCtrl = @"DetailViewCtrl";
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UIView *progressView;
 
+@property (nonatomic, strong) UIControl *searchBg;
+
 @end
 
 @implementation CollectionViewController
@@ -199,6 +201,28 @@ static NSString * const detailViewCtrl = @"DetailViewCtrl";
     [self.characters removeAllObjects];
     
     [self loadMore:nil];
+    [self.searchBar resignFirstResponder];
+    
+    if (self.searchBg) {
+        [self.searchBg removeFromSuperview];
+    }
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    if (!self.searchBg) {
+        self.searchBg = [[UIControl alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        [self.searchBg addTarget:self action:@selector(backgroundTap) forControlEvents:UIControlEventTouchUpInside];
+    }
+    [self.view addSubview:self.searchBg];
+    return YES;
+}
+
+- (void)backgroundTap {
+    [self.searchBar resignFirstResponder];
+    
+    if (self.searchBg) {
+        [self.searchBg removeFromSuperview];
+    }
 }
 
 @end

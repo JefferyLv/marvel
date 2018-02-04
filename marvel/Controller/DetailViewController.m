@@ -19,13 +19,6 @@
 
 static NSString * const cellIdentifier = @"DetailCell";
 
-enum {
-    Comics = 0,
-    Events,
-    Stories,
-    Series,
-} ItemType;
-
 @interface DetailViewController ()
 
 @property (nonatomic, weak) IBOutlet UIButton *likeButton;
@@ -118,16 +111,15 @@ enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    CGFloat height = 0;
+    CGFloat height = 36;
+    CGFloat margin = 36;
     Item *item = [self getItems:indexPath.section][indexPath.row];
     if (item.desc) {
-//        CGFloat FontSize = 16;
-//        UIFont *font = [UIFont systemFontOfSize:FontSize];
-//        CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-//        height = [UILabel getHeightByWidth:screenSize.width title:item.desc font:font];
-        height = 60;
+        UIFont *font = [UIFont systemFontOfSize:14];
+        CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+        height += [UILabel getHeightByWidth:screenSize.width - margin title:item.desc font:font];
     }
-    return height + 36;
+    return height;
 }
 
 #pragma mark <MISC>
@@ -148,25 +140,31 @@ enum {
 
 - (void)loadDetails {
     NSString *id = [NSString stringWithFormat:@"%ld", (long)self.character.idField];
-    [[MarvelService sharedInstance] getComics:id
-                                       offset:0
-                                        limit:3
-                                   completion:^(NSArray<Item *> *comics, NSError *error)
-     {
-         if (!error)
-         {
-             NSArray<Item *>* items = self.character.comics.items;
-             for (int i = 0; i < comics.count; i++) {
-                 if ([items[i].resourceURI isEqualToString:comics[i].resourceURI]) {
-                     items[i].desc = comics[i].desc;
+    NSInteger offset = 0;
+    NSInteger limit = 3;
+    for (int tp = 0; tp < 4; tp++) {
+        NSArray<Item *>* olditems = [self getItems:tp];
+        [[MarvelService sharedInstance] getItemByType:tp
+                                            character:id
+                                               offset:offset
+                                                limit:limit
+                                           completion:^(NSArray<Item *> *items, NSError *error)
+             {
+                 if (!error)
+                 {
+                     for (int i = 0; i < items.count; i++) {
+                         if ([olditems[i].resourceURI isEqualToString:items[i].resourceURI]) {
+                             olditems[i].desc = items[i].desc;
+                         }
+                     }
+        
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         [self.characterDetails reloadSections:[NSIndexSet indexSetWithIndex:tp] withRowAnimation:NO];
+                     });
                  }
-             }
-             
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 [self.characterDetails reloadSections:[NSIndexSet indexSetWithIndex:Comics] withRowAnimation:NO];
-             });
-         }
-     }];
+             }];
+    }
+
 }
 
 @end

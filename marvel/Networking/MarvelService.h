@@ -8,6 +8,13 @@
 
 #import <UIKit/UIkit.h>
 
+typedef NS_ENUM(NSUInteger, ItemType) {
+    Comics = 0,
+    Events,
+    Stories,
+    Series,
+};
+
 @interface MarvelService : NSObject
 
 + (instancetype)sharedInstance;
@@ -17,10 +24,11 @@
                 limit:(NSUInteger)limit
            completion:(void(^)(NSArray *characters, NSInteger total, NSError *error))completion;
 
-- (void)getComics:(NSString*)characterId
-           offset:(NSUInteger)offset
-            limit:(NSUInteger)limit
-       completion:(void(^)(NSArray *comics, NSError *error))completion;
+- (void)getItemByType:(ItemType)type
+            character:(NSString*)characterId
+               offset:(NSUInteger)offset
+                limit:(NSUInteger)limit
+           completion:(void(^)(NSArray *items, NSError *error))completion;
 
 - (void)getImage:(NSString*)url
       completion:(void(^)(UIImage* image, NSError *error))completion;

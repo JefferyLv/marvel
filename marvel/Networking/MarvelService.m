@@ -72,6 +72,11 @@ static NSString * const HOST = @"https://gateway.marvel.com:443";
                                             completionHandler:^(NSData * _Nullable data,
                                                                 NSURLResponse * _Nullable response,
                                                                 NSError * _Nullable error) {
+        if (!data) {
+            if (completion) completion(nil, 0, error);
+            return;
+        }
+                                                
         NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data
                                                               options:NSJSONReadingMutableContainers
                                                                 error:nil];
@@ -90,19 +95,41 @@ static NSString * const HOST = @"https://gateway.marvel.com:443";
     [task resume];
 }
 
-- (void)getComics:(NSString*)characterId
-           offset:(NSUInteger)offset
-            limit:(NSUInteger)limit
-       completion:(void(^)(NSArray *comics, NSError *error))completion
+- (void)getItemByType:(ItemType)type
+            character:(NSString*)characterId
+               offset:(NSUInteger)offset
+                limit:(NSUInteger)limit
+           completion:(void(^)(NSArray *items, NSError *error))completion
 {
-    NSString *api = [NSString stringWithFormat:@"v1/public/characters/%@/comics", characterId];
-    
+    switch (type) {
+        case Comics:
+            [self getItemsByApi:@"comics" character:characterId order:@"title" offset:offset limit:limit completion:completion];
+            break;
+        case Events:
+            [self getItemsByApi:@"events" character:characterId order:@"name" offset:offset limit:limit completion:completion];
+            break;
+        case Stories:
+            [self getItemsByApi:@"stories" character:characterId order:@"id" offset:offset limit:limit completion:completion];
+            break;
+        case Series:
+            [self getItemsByApi:@"series" character:characterId order:@"title" offset:offset limit:limit completion:completion];
+            break;
+        default:
+            break;
+    }
+}
+- (void)getItemsByApi:(NSString*)api
+             character:(NSString*)characterId
+                 order:(NSString*)order
+                offset:(NSUInteger)offset
+                 limit:(NSUInteger)limit
+            completion:(void(^)(NSArray *comics, NSError *error))completion
+{
     long currentTime = (long)(NSTimeInterval)([[NSDate date] timeIntervalSince1970]);
-    
     NSString *stringToHash = [NSString stringWithFormat:@"%lu%@%@", currentTime, self.privateKey, self.publicKey];
     NSString *hash = [NSString MD5:stringToHash];
     
-    NSString* endpoint = [NSString stringWithFormat:@"%@/%@?orderBy=title&limit=%ld&offset=%ld&apikey=%@&ts=%lu&&hash=%@", HOST, api, limit, offset, self.publicKey, currentTime, hash];
+    NSString* endpoint = [NSString stringWithFormat:@"%@/v1/public/characters/%@/%@?orderBy=%@&limit=%ld&offset=%ld&apikey=%@&ts=%lu&&hash=%@", HOST, characterId, api, order, limit, offset, self.publicKey, currentTime, hash];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:endpoint]];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -110,6 +137,10 @@ static NSString * const HOST = @"https://gateway.marvel.com:443";
                                             completionHandler:^(NSData * _Nullable data,
                                                                 NSURLResponse * _Nullable response,
                                                                 NSError * _Nullable error) {
+                                                if (!data) {
+                                                    if (completion) completion(nil, error);
+                                                    return;
+                                                }
                                                 NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data
                                                                                                       options:NSJSONReadingMutableContainers
                                                                                                         error:nil];
@@ -127,6 +158,7 @@ static NSString * const HOST = @"https://gateway.marvel.com:443";
     
     [task resume];
 }
+
 
 - (void)getImage:(NSString*)url
       completion:(void(^)(UIImage* image, NSError *error))completion
