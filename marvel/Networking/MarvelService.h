@@ -15,7 +15,12 @@
 - (void)getCharacters:(NSString*)nameStart
                offset:(NSUInteger)offset
                 limit:(NSUInteger)limit
-           completion:(void(^)(NSArray *heroArray, NSInteger total, NSError *error))completion;
+           completion:(void(^)(NSArray *characters, NSInteger total, NSError *error))completion;
+
+- (void)getComics:(NSString*)characterId
+           offset:(NSUInteger)offset
+            limit:(NSUInteger)limit
+       completion:(void(^)(NSArray *comics, NSError *error))completion;
 
 - (void)getImage:(NSString*)url
       completion:(void(^)(UIImage* image, NSError *error))completion;

@@ -2,6 +2,8 @@
 #import "Item.h"
 
 NSString *const kItemName = @"name";
+NSString *const kItemTitle = @"title";
+NSString *const kItemDesc = @"description";
 NSString *const kItemResourceURI = @"resourceURI";
 NSString *const kItemType = @"type";
 
@@ -19,9 +21,15 @@ NSString *const kItemType = @"type";
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
 	self = [super init];
-	if(![dictionary[kItemName] isKindOfClass:[NSNull class]]){
+	if(dictionary[kItemName] && ![dictionary[kItemName] isKindOfClass:[NSNull class]]){
 		self.name = dictionary[kItemName];
-	}	
+	}
+    if(dictionary[kItemTitle] && ![dictionary[kItemTitle] isKindOfClass:[NSNull class]]){
+        self.name = dictionary[kItemTitle];
+    }
+    if(![dictionary[kItemDesc] isKindOfClass:[NSNull class]]){
+        self.desc = dictionary[kItemDesc];
+    }
 	if(![dictionary[kItemResourceURI] isKindOfClass:[NSNull class]]){
 		self.resourceURI = dictionary[kItemResourceURI];
 	}	
@@ -41,6 +49,9 @@ NSString *const kItemType = @"type";
 	if(self.name != nil){
 		dictionary[kItemName] = self.name;
 	}
+    if(self.desc != nil){
+        dictionary[kItemDesc] = self.desc;
+    }
 	if(self.resourceURI != nil){
 		dictionary[kItemResourceURI] = self.resourceURI;
 	}
@@ -62,6 +73,9 @@ NSString *const kItemType = @"type";
 	if(self.name != nil){
 		[aCoder encodeObject:self.name forKey:kItemName];
 	}
+    if(self.desc != nil){
+        [aCoder encodeObject:self.desc forKey:kItemDesc];
+    }
 	if(self.resourceURI != nil){
 		[aCoder encodeObject:self.resourceURI forKey:kItemResourceURI];
 	}
@@ -78,6 +92,7 @@ NSString *const kItemType = @"type";
 {
 	self = [super init];
 	self.name = [aDecoder decodeObjectForKey:kItemName];
+    self.desc = [aDecoder decodeObjectForKey:kItemDesc];
 	self.resourceURI = [aDecoder decodeObjectForKey:kItemResourceURI];
 	self.type = [aDecoder decodeObjectForKey:kItemType];
 	return self;
@@ -92,6 +107,7 @@ NSString *const kItemType = @"type";
 	Item *copy = [Item new];
 
 	copy.name = [self.name copy];
+    copy.desc = [self.desc copy];
 	copy.resourceURI = [self.resourceURI copy];
 	copy.type = [self.type copy];
 

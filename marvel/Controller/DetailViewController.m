@@ -13,7 +13,9 @@
 #import "UILabel+Size.h"
 
 #import "Character.h"
+#import "Item.h"
 #import "FavoriteManager.h"
+#import "MarvelService.h"
 
 static NSString * const cellIdentifier = @"DetailCell";
 
@@ -28,7 +30,6 @@ enum {
 
 @property (nonatomic, weak) IBOutlet UIButton *likeButton;
 @property (nonatomic, weak) IBOutlet UITextView *characterName;
-@property (nonatomic, weak) IBOutlet UITextView *characterDesc;
 @property (nonatomic, weak) IBOutlet UIImageView *characterImage;
 @property (nonatomic, weak) IBOutlet UITableView *characterDetails;
 
@@ -41,14 +42,13 @@ enum {
     // Do any additional setup after loading the view, typically from a nib.
     
     self.characterName.text = self.character.name;
-    if (self.character.descriptionField.length > 0) {
-        self.characterDesc.text = self.character.descriptionField;
-    }
     self.likeButton.selected = [[FavoriteManager sharedInstance] isFavorited:self.character];
     
     [self.characterImage setImageFromCache:[self.character.thumbnail toString]];
     [self.characterImage.layer setCornerRadius:CGRectGetHeight([self.characterImage bounds]) / 2];
     [self.characterImage.layer setMasksToBounds:YES];
+    
+    [self loadDetails];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,7 +88,7 @@ enum {
     
     Item *item = [self getItems:indexPath.section][indexPath.row];
     [cell configureCellWithName:item.name
-                 andDescription:item.resourceURI];
+                 andDescription:item.desc];
     
     return cell;
 }
@@ -117,12 +117,17 @@ enum {
 #pragma mark <UITableViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    CGFloat FontSize = 16;
-    UIFont *font = [UIFont systemFontOfSize:FontSize];
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+
+    CGFloat height = 0;
     Item *item = [self getItems:indexPath.section][indexPath.row];
-    return [UILabel getHeightByWidth:screenSize.width title:item.resourceURI font:font] + 60;
+    if (item.desc) {
+//        CGFloat FontSize = 16;
+//        UIFont *font = [UIFont systemFontOfSize:FontSize];
+//        CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+//        height = [UILabel getHeightByWidth:screenSize.width title:item.desc font:font];
+        height = 60;
+    }
+    return height + 36;
 }
 
 #pragma mark <MISC>
@@ -139,6 +144,29 @@ enum {
         default:
             return self.character.series.items;
     }
+}
+
+- (void)loadDetails {
+    NSString *id = [NSString stringWithFormat:@"%ld", (long)self.character.idField];
+    [[MarvelService sharedInstance] getComics:id
+                                       offset:0
+                                        limit:3
+                                   completion:^(NSArray<Item *> *comics, NSError *error)
+     {
+         if (!error)
+         {
+             NSArray<Item *>* items = self.character.comics.items;
+             for (int i = 0; i < comics.count; i++) {
+                 if ([items[i].resourceURI isEqualToString:comics[i].resourceURI]) {
+                     items[i].desc = comics[i].desc;
+                 }
+             }
+             
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [self.characterDetails reloadSections:[NSIndexSet indexSetWithIndex:Comics] withRowAnimation:NO];
+             });
+         }
+     }];
 }
 
 @end

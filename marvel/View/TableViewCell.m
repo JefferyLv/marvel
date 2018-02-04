@@ -17,7 +17,6 @@
     self.name.text = name;
     self.desc.text = description;
 
-    [self.desc sizeToFit];
 }
 
 @end

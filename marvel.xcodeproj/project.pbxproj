@@ -16,12 +16,14 @@
 		732FA4E020220D460011EAE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 732FA4DF20220D460011EAE2 /* Assets.xcassets */; };
 		732FA4F020220D7D0011EAE2 /* BaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4E220220D7C0011EAE2 /* BaseResponse.m */; };
 		732FA4F120220D7D0011EAE2 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4E820220D7C0011EAE2 /* Item.m */; };
-		732FA4F220220D7D0011EAE2 /* Data.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4EA20220D7C0011EAE2 /* Data.m */; };
+		732FA4F220220D7D0011EAE2 /* BaseData.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4EA20220D7C0011EAE2 /* BaseData.m */; };
 		732FA4F320220D7D0011EAE2 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4EB20220D7C0011EAE2 /* Character.m */; };
 		732FA4F420220D7D0011EAE2 /* Url.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4ED20220D7C0011EAE2 /* Url.m */; };
 		732FA4F520220D7D0011EAE2 /* Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4EE20220D7C0011EAE2 /* Detail.m */; };
 		732FA4F620220D7D0011EAE2 /* Thumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4EF20220D7D0011EAE2 /* Thumbnail.m */; };
 		7344A0542022E53E001F7594 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7344A0532022E53E001F7594 /* TableViewCell.m */; };
+		7379530A2026ABEE002C5F95 /* Characters.m in Sources */ = {isa = PBXBuildFile; fileRef = 737953092026ABEE002C5F95 /* Characters.m */; };
+		7379530D2026BC41002C5F95 /* Items.m in Sources */ = {isa = PBXBuildFile; fileRef = 7379530C2026BC40002C5F95 /* Items.m */; };
 		739D8E2720235483005F139F /* MarvelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 739D8E2620235483005F139F /* MarvelService.m */; };
 		739D8E2A20240614005F139F /* UIImageView+Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 739D8E2920240614005F139F /* UIImageView+Cache.m */; };
 		739D8E2D20240842005F139F /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 739D8E2C20240842005F139F /* ImageCache.m */; };
@@ -68,14 +70,14 @@
 		732FA4D320220CB50011EAE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		732FA4DF20220D460011EAE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		732FA4E220220D7C0011EAE2 /* BaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseResponse.m; sourceTree = "<group>"; };
-		732FA4E320220D7C0011EAE2 /* Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Data.h; sourceTree = "<group>"; };
+		732FA4E320220D7C0011EAE2 /* BaseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseData.h; sourceTree = "<group>"; };
 		732FA4E420220D7C0011EAE2 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		732FA4E520220D7C0011EAE2 /* BaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseResponse.h; sourceTree = "<group>"; };
 		732FA4E620220D7C0011EAE2 /* Thumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thumbnail.h; sourceTree = "<group>"; };
 		732FA4E720220D7C0011EAE2 /* Url.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Url.h; sourceTree = "<group>"; };
 		732FA4E820220D7C0011EAE2 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		732FA4E920220D7C0011EAE2 /* Detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Detail.h; sourceTree = "<group>"; };
-		732FA4EA20220D7C0011EAE2 /* Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Data.m; sourceTree = "<group>"; };
+		732FA4EA20220D7C0011EAE2 /* BaseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseData.m; sourceTree = "<group>"; };
 		732FA4EB20220D7C0011EAE2 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 		732FA4EC20220D7C0011EAE2 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		732FA4ED20220D7C0011EAE2 /* Url.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Url.m; sourceTree = "<group>"; };
@@ -83,6 +85,10 @@
 		732FA4EF20220D7D0011EAE2 /* Thumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Thumbnail.m; sourceTree = "<group>"; };
 		7344A0522022E52E001F7594 /* TableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		7344A0532022E53E001F7594 /* TableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		737953082026ABEE002C5F95 /* Characters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Characters.h; sourceTree = "<group>"; };
+		737953092026ABEE002C5F95 /* Characters.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Characters.m; sourceTree = "<group>"; };
+		7379530B2026BC40002C5F95 /* Items.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Items.h; sourceTree = "<group>"; };
+		7379530C2026BC40002C5F95 /* Items.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Items.m; sourceTree = "<group>"; };
 		739D8E252023546C005F139F /* MarvelService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarvelService.h; sourceTree = "<group>"; };
 		739D8E2620235483005F139F /* MarvelService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarvelService.m; sourceTree = "<group>"; };
 		739D8E28202405F2005F139F /* UIImageView+Cache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Cache.h"; sourceTree = "<group>"; };
@@ -188,20 +194,24 @@
 		732FA4E120220D5C0011EAE2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				732FA4E920220D7C0011EAE2 /* Detail.h */,
-				732FA4EE20220D7C0011EAE2 /* Detail.m */,
-				732FA4E320220D7C0011EAE2 /* Data.h */,
-				732FA4EA20220D7C0011EAE2 /* Data.m */,
-				732FA4EC20220D7C0011EAE2 /* Item.h */,
-				732FA4E820220D7C0011EAE2 /* Item.m */,
+				732FA4E320220D7C0011EAE2 /* BaseData.h */,
+				732FA4EA20220D7C0011EAE2 /* BaseData.m */,
 				732FA4E520220D7C0011EAE2 /* BaseResponse.h */,
 				732FA4E220220D7C0011EAE2 /* BaseResponse.m */,
+				737953082026ABEE002C5F95 /* Characters.h */,
+				737953092026ABEE002C5F95 /* Characters.m */,
+				7379530B2026BC40002C5F95 /* Items.h */,
+				7379530C2026BC40002C5F95 /* Items.m */,
 				732FA4E420220D7C0011EAE2 /* Character.h */,
 				732FA4EB20220D7C0011EAE2 /* Character.m */,
-				732FA4E620220D7C0011EAE2 /* Thumbnail.h */,
-				732FA4EF20220D7D0011EAE2 /* Thumbnail.m */,
+				732FA4E920220D7C0011EAE2 /* Detail.h */,
+				732FA4EE20220D7C0011EAE2 /* Detail.m */,
+				732FA4EC20220D7C0011EAE2 /* Item.h */,
+				732FA4E820220D7C0011EAE2 /* Item.m */,
 				732FA4E720220D7C0011EAE2 /* Url.h */,
 				732FA4ED20220D7C0011EAE2 /* Url.m */,
+				732FA4E620220D7C0011EAE2 /* Thumbnail.h */,
+				732FA4EF20220D7D0011EAE2 /* Thumbnail.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -440,18 +450,20 @@
 				732FA4B220220CB50011EAE2 /* CollectionViewController.m in Sources */,
 				732FA4BD20220CB50011EAE2 /* main.m in Sources */,
 				73E558042022A2D700F20364 /* NSString+MD5.m in Sources */,
+				7379530A2026ABEE002C5F95 /* Characters.m in Sources */,
 				732FA4F420220D7D0011EAE2 /* Url.m in Sources */,
 				739D8E7F2025F428005F139F /* OverlayAnimationController.m in Sources */,
 				732FA4F320220D7D0011EAE2 /* Character.m in Sources */,
 				732FA4AF20220CB50011EAE2 /* AppDelegate.m in Sources */,
 				732FA4F520220D7D0011EAE2 /* Detail.m in Sources */,
 				732FA4F020220D7D0011EAE2 /* BaseResponse.m in Sources */,
-				732FA4F220220D7D0011EAE2 /* Data.m in Sources */,
+				732FA4F220220D7D0011EAE2 /* BaseData.m in Sources */,
 				739D8E3020244C36005F139F /* FavoriteManager.m in Sources */,
 				73E558072022B58300F20364 /* DetailViewController.m in Sources */,
 				739D8E2A20240614005F139F /* UIImageView+Cache.m in Sources */,
 				739D8E2D20240842005F139F /* ImageCache.m in Sources */,
 				739D8E2720235483005F139F /* MarvelService.m in Sources */,
+				7379530D2026BC41002C5F95 /* Items.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

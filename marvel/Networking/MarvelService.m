@@ -10,7 +10,10 @@
 #import "NSString+MD5.h"
 
 #import "Character.h"
-#import "BaseResponse.h"
+#import "Characters.h"
+
+#import "Item.h"
+#import "Items.h"
 
 static NSString * const HOST = @"https://gateway.marvel.com:443";
 
@@ -72,13 +75,13 @@ static NSString * const HOST = @"https://gateway.marvel.com:443";
         NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data
                                                               options:NSJSONReadingMutableContainers
                                                                 error:nil];
-        BaseResponse* res = [[BaseResponse alloc] initWithDictionary:json];
+        Characters *res = [[Characters alloc] initWithDictionary:json];
         
         if (completion) {
             if (error) {
                 completion(nil, 0, error);
             } else {
-                completion(res.data.results, res.data.total, nil);
+                completion(res.results, res.total, nil);
             }
             
         }
@@ -87,6 +90,43 @@ static NSString * const HOST = @"https://gateway.marvel.com:443";
     [task resume];
 }
 
+- (void)getComics:(NSString*)characterId
+           offset:(NSUInteger)offset
+            limit:(NSUInteger)limit
+       completion:(void(^)(NSArray *comics, NSError *error))completion
+{
+    NSString *api = [NSString stringWithFormat:@"v1/public/characters/%@/comics", characterId];
+    
+    long currentTime = (long)(NSTimeInterval)([[NSDate date] timeIntervalSince1970]);
+    
+    NSString *stringToHash = [NSString stringWithFormat:@"%lu%@%@", currentTime, self.privateKey, self.publicKey];
+    NSString *hash = [NSString MD5:stringToHash];
+    
+    NSString* endpoint = [NSString stringWithFormat:@"%@/%@?orderBy=title&limit=%ld&offset=%ld&apikey=%@&ts=%lu&&hash=%@", HOST, api, limit, offset, self.publicKey, currentTime, hash];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:endpoint]];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData * _Nullable data,
+                                                                NSURLResponse * _Nullable response,
+                                                                NSError * _Nullable error) {
+                                                NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                      options:NSJSONReadingMutableContainers
+                                                                                                        error:nil];
+                                                Items* res = [[Items alloc] initWithDictionary:json];
+                                                
+                                                if (completion) {
+                                                    if (error) {
+                                                        completion(nil, error);
+                                                    } else {
+                                                        completion(res.results, nil);
+                                                    }
+                                                    
+                                                }
+                                            }];
+    
+    [task resume];
+}
 
 - (void)getImage:(NSString*)url
       completion:(void(^)(UIImage* image, NSError *error))completion
