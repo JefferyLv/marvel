@@ -1,5 +1,5 @@
 //
-//  UILabel+size.h
+//  ModalTransitionDelegate.h
 //  marvel
 //
 //  Created by lvwei on 03/02/2018.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UILabel (Size)
-
-+ (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font;
+@interface ModalTransition: NSObject <UIViewControllerTransitioningDelegate>
 
 @end

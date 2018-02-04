@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		732FA4AF20220CB50011EAE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4AE20220CB50011EAE2 /* AppDelegate.m */; };
 		732FA4B220220CB50011EAE2 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4B120220CB50011EAE2 /* CollectionViewController.m */; };
-		732FA4B520220CB50011EAE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 732FA4B320220CB50011EAE2 /* Main.storyboard */; };
+		732FA4B520220CB50011EAE2 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 732FA4B320220CB50011EAE2 /* Launch.storyboard */; };
 		732FA4BD20220CB50011EAE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4BC20220CB50011EAE2 /* main.m */; };
 		732FA4C720220CB50011EAE2 /* marvelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4C620220CB50011EAE2 /* marvelTests.m */; };
 		732FA4D220220CB50011EAE2 /* marvelUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 732FA4D120220CB50011EAE2 /* marvelUITests.m */; };
@@ -27,6 +27,8 @@
 		739D8E2D20240842005F139F /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 739D8E2C20240842005F139F /* ImageCache.m */; };
 		739D8E3020244C36005F139F /* FavoriteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 739D8E2F20244C36005F139F /* FavoriteManager.m */; };
 		739D8E3420259634005F139F /* UILabel+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 739D8E3320259634005F139F /* UILabel+Size.m */; };
+		739D8E792025F342005F139F /* ModalTransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 739D8E782025F342005F139F /* ModalTransitionDelegate.m */; };
+		739D8E7F2025F428005F139F /* OverlayAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 739D8E7E2025F428005F139F /* OverlayAnimationController.m */; };
 		73E558042022A2D700F20364 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E558032022A2D700F20364 /* NSString+MD5.m */; };
 		73E558072022B58300F20364 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E558062022B58300F20364 /* DetailViewController.m */; };
 		73E5580A2022B8A700F20364 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E558082022B8A700F20364 /* CollectionViewCell.m */; };
@@ -55,7 +57,7 @@
 		732FA4AE20220CB50011EAE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		732FA4B020220CB50011EAE2 /* CollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		732FA4B120220CB50011EAE2 /* CollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
-		732FA4B420220CB50011EAE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		732FA4B420220CB50011EAE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Launch.storyboard; sourceTree = "<group>"; };
 		732FA4BB20220CB50011EAE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		732FA4BC20220CB50011EAE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		732FA4C220220CB50011EAE2 /* marvelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = marvelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +93,10 @@
 		739D8E2F20244C36005F139F /* FavoriteManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FavoriteManager.m; sourceTree = "<group>"; };
 		739D8E3220259615005F139F /* UILabel+Size.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Size.h"; sourceTree = "<group>"; };
 		739D8E3320259634005F139F /* UILabel+Size.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Size.m"; sourceTree = "<group>"; };
+		739D8E772025F321005F139F /* ModalTransitionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModalTransitionDelegate.h; sourceTree = "<group>"; };
+		739D8E782025F342005F139F /* ModalTransitionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModalTransitionDelegate.m; sourceTree = "<group>"; };
+		739D8E7D2025F428005F139F /* OverlayAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OverlayAnimationController.h; sourceTree = "<group>"; };
+		739D8E7E2025F428005F139F /* OverlayAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OverlayAnimationController.m; sourceTree = "<group>"; };
 		73E558012022A23300F20364 /* NSString+MD5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		73E558032022A2D700F20364 /* NSString+MD5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		73E558052022B57200F20364 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -150,9 +156,10 @@
 				732FA4FB202216340011EAE2 /* View */,
 				732FA4E120220D5C0011EAE2 /* Model */,
 				732FA4F82022125C0011EAE2 /* Controller */,
-				739D8E3120244C66005F139F /* DataManager */,
 				739D8E2420235144005F139F /* Cache */,
+				739D8E762025F1EB005F139F /* Transition */,
 				732FA4F7202211FD0011EAE2 /* Networking */,
+				739D8E3120244C66005F139F /* DataManager */,
 				73E558002022A1FB00F20364 /* Extension */,
 				732FA4FA2022128F0011EAE2 /* Resources */,
 				732FA4F9202212700011EAE2 /* Supporting Files */,
@@ -215,6 +222,7 @@
 				732FA4B120220CB50011EAE2 /* CollectionViewController.m */,
 				73E558052022B57200F20364 /* DetailViewController.h */,
 				73E558062022B58300F20364 /* DetailViewController.m */,
+				732FA4B320220CB50011EAE2 /* Launch.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -226,7 +234,6 @@
 				732FA4AE20220CB50011EAE2 /* AppDelegate.m */,
 				732FA4BC20220CB50011EAE2 /* main.m */,
 				732FA4BB20220CB50011EAE2 /* Info.plist */,
-				732FA4B320220CB50011EAE2 /* Main.storyboard */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -266,6 +273,17 @@
 				739D8E2F20244C36005F139F /* FavoriteManager.m */,
 			);
 			path = DataManager;
+			sourceTree = "<group>";
+		};
+		739D8E762025F1EB005F139F /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				739D8E772025F321005F139F /* ModalTransitionDelegate.h */,
+				739D8E782025F342005F139F /* ModalTransitionDelegate.m */,
+				739D8E7D2025F428005F139F /* OverlayAnimationController.h */,
+				739D8E7E2025F428005F139F /* OverlayAnimationController.m */,
+			);
+			path = Transition;
 			sourceTree = "<group>";
 		};
 		73E558002022A1FB00F20364 /* Extension */ = {
@@ -388,7 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				732FA4E020220D460011EAE2 /* Assets.xcassets in Resources */,
-				732FA4B520220CB50011EAE2 /* Main.storyboard in Resources */,
+				732FA4B520220CB50011EAE2 /* Launch.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,12 +434,14 @@
 				73E5580A2022B8A700F20364 /* CollectionViewCell.m in Sources */,
 				739D8E3420259634005F139F /* UILabel+Size.m in Sources */,
 				732FA4F620220D7D0011EAE2 /* Thumbnail.m in Sources */,
+				739D8E792025F342005F139F /* ModalTransitionDelegate.m in Sources */,
 				7344A0542022E53E001F7594 /* TableViewCell.m in Sources */,
 				732FA4F120220D7D0011EAE2 /* Item.m in Sources */,
 				732FA4B220220CB50011EAE2 /* CollectionViewController.m in Sources */,
 				732FA4BD20220CB50011EAE2 /* main.m in Sources */,
 				73E558042022A2D700F20364 /* NSString+MD5.m in Sources */,
 				732FA4F420220D7D0011EAE2 /* Url.m in Sources */,
+				739D8E7F2025F428005F139F /* OverlayAnimationController.m in Sources */,
 				732FA4F320220D7D0011EAE2 /* Character.m in Sources */,
 				732FA4AF20220CB50011EAE2 /* AppDelegate.m in Sources */,
 				732FA4F520220D7D0011EAE2 /* Detail.m in Sources */,
@@ -467,12 +487,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		732FA4B320220CB50011EAE2 /* Main.storyboard */ = {
+		732FA4B320220CB50011EAE2 /* Launch.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				732FA4B420220CB50011EAE2 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Launch.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

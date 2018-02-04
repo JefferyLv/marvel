@@ -9,10 +9,9 @@
 #import "CollectionViewController.h"
 #import "CollectionViewCell.h"
 #import "DetailViewController.h"
+#import "ModalTransitionDelegate.h"
 
 #import "Character.h"
-#import "BaseResponse.h"
-
 #import "MarvelService.h"
 #import "FavoriteManager.h"
 
@@ -24,6 +23,7 @@ static NSString * const detailViewCtrl = @"DetailViewCtrl";
 
 @property (nonatomic, assign) BOOL hasMore;
 @property (nonatomic, strong) NSMutableArray *characters;
+@property (nonatomic, strong) ModalTransition *presentTransition;
 
 @property (nonatomic, weak) IBOutlet UIButton *homeButton;
 @property (nonatomic, weak) IBOutlet UIButton *favoButton;
@@ -173,19 +173,22 @@ static NSString * const detailViewCtrl = @"DetailViewCtrl";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    self.presentTransition = [ModalTransition new];
+    
     DetailViewController *detailView = [self.storyboard instantiateViewControllerWithIdentifier:detailViewCtrl];
-    Character *character = self.characters[indexPath.row];
-    detailView.character = character;
+    detailView.character = self.characters[indexPath.row];
+    detailView.transitioningDelegate = self.presentTransition;
+    detailView.modalPresentationStyle = UIModalPresentationOverFullScreen;
     
     [self presentViewController:detailView animated:YES completion:nil];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    CGFloat margin = 30;
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width - 40;
-    float cellWidth = screenWidth / 2.0;
-    CGSize size = CGSizeMake(cellWidth, cellWidth + 40);
+    CGFloat cellWidth = (screenRect.size.width - margin) / 2.0;
+    CGSize size = CGSizeMake(cellWidth, cellWidth + margin);
     
     return size;
 }

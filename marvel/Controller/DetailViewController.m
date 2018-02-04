@@ -8,11 +8,11 @@
 
 #import "DetailViewController.h"
 #import "TableViewCell.h"
-#import "Character.h"
 
 #import "UIImageView+Cache.h"
 #import "UILabel+Size.h"
 
+#import "Character.h"
 #import "FavoriteManager.h"
 
 static NSString * const cellIdentifier = @"DetailCell";
